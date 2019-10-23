@@ -68,7 +68,9 @@
         name: 'Ikhda'
       },
       /** 
-       * A computed property is used to declaratively describe a value that depends on other values. When you data-bind to a computed property inside the template, Vue knows when to update the DOM when any of the values depended upon by the computed property has changed.
+       * A computed property is used to declaratively describe a value that depends on other values. 
+       When you data-bind to a computed property inside the template, Vue knows when to update the DOM
+      when any of the values depended upon by the computed property has changed.
       */
       computed: {
         output: function () {
@@ -76,7 +78,10 @@
         }
       },
       /**
-       * A watcher is a special Vue.js feature that allows you to spy on one property of the component state, and run a function when that property value changes. When the name changes we want to do something, like printing a console log. Watchers cannot be looked up from a template as you can with computed properties.
+       * A watcher is a special Vue.js feature that allows you to spy on one property of the component 
+       state, and run a function when that property value changes. When the name changes we want to do 
+       something, like printing a console log. Watchers cannot be looked up from a template as you 
+       can with computed properties.
       */
       watch: {
         counter: function (value) {
@@ -87,7 +92,10 @@
         }
       },
       /**
-       * Methods: These are exactly what they sound like they might be (yay, naming!). They're functions that hang off of an object—typically the Vue instance itself or a Vue component. Computed: These properties may at first look like they'd be used like a method, but are not. 
+       * Methods: These are exactly what they sound like they might be (yay, naming!). 
+       They're functions that hang off of an object—typically the Vue instance itself 
+       or a Vue component. Computed: These properties may at first look like they'd 
+       be used like a method, but are not. 
       */
       methods: {
         sayHello: function () {
