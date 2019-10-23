@@ -23,19 +23,89 @@
     <!-- The double mustaches interprets the data as plain text, not HTML. In order to output real HTML,
     you will need to use the v-html -->
     <p v-html="finishedLink"></p>
+    <hr>
+    <!-- Listening to Events We can use the v-on directive to listen to DOM events and run some
+    JavaScript when they're triggered. -->
+    <button v-on:click="counter++">increase</button>
+    <button v-on:click="counter--">decrease</button>
+    <button v-on:click="secondCounter++">increase second</button>
+    <button v-on:click="secondCounter--">decrease second</button>
+    <p>Counter: {{ counter }} | {{ secondCounter }}</p>
+    <p>Result: {{ result() }} | {{ output }}</p>
+    <!-- The mousemove event occurs whenever the mouse pointer moves within the selected element. -->
+    <p v-on:mousemove="updateCoordinates">
+      Coordinates: {{ x }} / {{ y }}
+      - <span v-on:mousemove.stop="">DEAD SPOT</span>
+    </p>
+    <!-- The keyup event occurs when a keyboard key is released. -->
+    <!-- And enter is specify which keyboard is it -->
+    <input type="text" v-on:keyup.enter="alertMe">
+    <small>Press Enter</small>
+    <hr>
+    <!-- v-model is a common directive used in almost every Vue application. It's typically used to
+    enable two-way data binding on form elements and works perfectly with input, checkbox, select,
+    textarea and radio -->
+    <input type="text" v-model="name">
+    <p>{{ name }}</p>
+    <hr>
+    <!-- we can change the v-bind:href to just :href and v-on:click to @click -->
+    <button @click="changeLink">Click to change the link!</button>
+    <a :href="link">Link</a>
   </div>
   <script>
     new Vue({
+      // connect to DOM
       el: '#app',
+      // store data to be used
       data: {
         title: 'Hello World!',
         link: 'http://google.com',
-        finishedLink: '<a href="link">Google</a>'
+        finishedLink: '<a href="link">Google</a>',
+        counter: 0,
+        secondCounter: 0,
+        x: 0,
+        y: 0,
+        name: 'Ikhda'
       },
+      /** 
+       * A computed property is used to declaratively describe a value that depends on other values. When you data-bind to a computed property inside the template, Vue knows when to update the DOM when any of the values depended upon by the computed property has changed.
+      */
+      computed: {
+        output: function () {
+          return this.secondCounter > 5 ? 'greater 5' : 'smaller 5';
+        }
+      },
+      /**
+       * A watcher is a special Vue.js feature that allows you to spy on one property of the component state, and run a function when that property value changes. When the name changes we want to do something, like printing a console log. Watchers cannot be looked up from a template as you can with computed properties.
+      */
+      watch: {
+        counter: function (value) {
+          var vm = this;
+          setTimeout(function () {
+            vm.counter = 0;
+          }, 2000);
+        }
+      },
+      /**
+       * Methods: These are exactly what they sound like they might be (yay, naming!). They're functions that hang off of an object—typically the Vue instance itself or a Vue component. Computed: These properties may at first look like they'd be used like a method, but are not. 
+      */
       methods: {
         sayHello: function () {
           this.title = 'Hello';
           return this.title;
+        },
+        result: function () {
+          return this.counter > 5 ? 'greater 5' : 'smaller 5';
+        },
+        updateCoordinates: function (event) {
+          this.x = event.clientX;
+          this.y = event.clientY;
+        },
+        alertMe: function () {
+          alert('Alert!');
+        },
+        changeLink: function() {
+          this.link = 'http://apple.com'
         }
       }
     });
