@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>VueJS</title>
+  <link rel="stylesheet" href="">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- If you – for whatever reason – want to only output something one time, then you can use the
+    v-once directive. This directive ensures that an element is only rendered once, and when Vue.js
+    re-renders the page, the element and all of its children will be considered as static content
+    and thereby skipped. -->
+    <h1 v-once>{{ title }}</h1>
+    <!-- v-bind. it is one way data binding,means you can only bind data to input element but can't
+    change bounded data changing input element. v-bind is used to bind html attribute.  -->
+    <p>{{ sayHello() }} - <a v-bind:href="link">Google</a></p>
+    <hr>
+    <!-- The double mustaches interprets the data as plain text, not HTML. In order to output real HTML,
+    you will need to use the v-html -->
+    <p v-html="finishedLink"></p>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        title: 'Hello World!',
+        link: 'http://google.com',
+        finishedLink: '<a href="link">Google</a>'
+      },
+      methods: {
+        sayHello: function () {
+          this.title = 'Hello';
+          return this.title;
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
